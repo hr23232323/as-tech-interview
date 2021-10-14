@@ -2,6 +2,7 @@ import requests
 import io
 from collections import Counter
 import re
+from unidecode import unidecode
 
 # Read the data from S3.
 FILE_URL = 'https://s3.amazonaws.com/abnormalsecurity-public/phishing_interview.txt'
@@ -51,9 +52,11 @@ def word_count(input_file):
                 
     return word_count
 
-# helper to process/clean text.
-# This can be expanded to clean up input data as required. 
+# Helper to process/clean text.
+# This can be expanded to further clean up input data as required. 
 def process_text(word_block):
-    word_block = word_block.lower()
-    return re.sub('[^\w]', ' ', word_block)
+    word_block = unidecode(word_block)              # remove accents etc.
+    word_block = word_block.lower()                 # make everything lowercase
+    word_block = re.sub('[\d]', ' ', word_block)    # remove numbers
+    return re.sub('[^\w]', ' ', word_block)         #remove all non-words and return
 

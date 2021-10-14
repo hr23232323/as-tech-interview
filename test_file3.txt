@@ -1,2 +1,8 @@
-An example of a phishing email, disguised as an official email from a (fictional) bank. The sender is attempting to trick the recipient into revealing confidential information by "confirming" it at the phisher's website. Note the misspelling of the words received and discrepancy as recieved and discrepency respectively. Also note that although the URL of the bank's webpage appears to be legitimate, the hyperlink would actually be pointed at the phisher's webpage.
-Phishing is the fraudulent attempt to obtain sensitive information such as usernames, passwords and credit card details, often for malicious reasons, by disguising as a trustworthy entity in an electronic communication.[1][2] The word is a neologism created as a homophone of fishing due to the similarity of using a bait in an attempt to catch a victim. The annual worldwide impact of phishing could be as high as US$5 billion.[3][better source needed]
+This is a level 3 file. 
+It has some special character$ and then sâm€”. 
+it has some upper case and lower CASE repeated words. 
+It contains some [234] and $257,973 and 2.353.
+
+It also has some new lines to worry about.
+
+And finally it has a single line with more than 512 characters to test incomplete words coming through the data stream. So you can ignore this or you can continue reading. It's 9:34pm and it's been a beautiful day in Boston. I think I'm very close to 512 characters and want to make sure I put a word which is split down the middle when 512 characters are read. Okay, goodbye now. And another caSe.
