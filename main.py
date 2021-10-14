@@ -1,8 +1,8 @@
+import sys
 import requests
 import io
 from collections import Counter
 import re
-from unidecode import unidecode
 
 # Read the data from S3.
 FILE_URL = 'https://s3.amazonaws.com/abnormalsecurity-public/phishing_interview.txt'
@@ -61,3 +61,12 @@ def process_text(word_block):
     word_block = word_block.replace("-", " ")    # replace dashes with spaces
     word_block = re.sub('[\d]', ' ', word_block)    # remove numbers
     return re.sub('[^\w]', ' ', word_block)         #remove all non-words and return
+
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        word = sys.argv[1]
+        count = word_count(input_file)[word]
+        print(f'In the document, the word "{word}" appeared {count} times')
+    else:
+        sys.stderr.write("Incorrect usage. Ex: python main.py <word-to-get-count>. For more details, check Readme.")
+        sys.exit()
