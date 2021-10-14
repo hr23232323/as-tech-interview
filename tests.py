@@ -1,51 +1,45 @@
 import unittest
 import io
 from pathlib import Path
-from main import word_count
+from main import word_count, input_file
 
 class TestStringMethods(unittest.TestCase):
     def test_basic_file(self):
         local_filename = "./test_file1.txt"
         decoded_file = Path(local_filename).read_text()
-        input_file = io.StringIO(decoded_file)
-        expected_wc = {
-            'this': 2, 
-            'is': 1, 
-            'a': 1, 
-            'very': 1, 
-            'basic': 1, 
-            'file': 1, 
-            'with': 1, 
-            'repeated': 1, 
-            'word': 1}
-        actual_wc = word_count(input_file)
-        self.assertEqual(actual_wc, expected_wc)
+        local_file = io.StringIO(decoded_file)
+        wc = word_count(local_file)
+        self.assertEqual(wc["this"], 2)
+        self.assertEqual(wc["repeated"], 1)
+        self.assertFalse("1" in wc)
 
     def test_harder_file(self):
         local_filename = "./test_file2.txt"
         decoded_file = Path(local_filename).read_text()
-        input_file = io.StringIO(decoded_file)
-        expected_wc = {
-            'this': 1, 
-            'is': 1, 
-            'a': 1, 
-            'level': 1, 
-            'file': 1, 
-            'it': 2, 
-            'has': 2, 
-            'some': 2, 
-            'special': 1, 
-            'character': 1, 
-            'and': 2, 
-            'then': 1, 
-            'sam': 1, 
-            'upper': 1, 
-            'case': 2, 
-            'lower': 1, 
-            'repeated': 1, 
-            'words': 1}
-        actual_wc = word_count(input_file)
-        self.assertEqual(actual_wc, expected_wc)
+        local_file = io.StringIO(decoded_file)
+        wc = word_count(local_file)
+        self.assertEqual(wc["some"], 2)
+        self.assertEqual(wc["case"], 2)
+        self.assertEqual(wc["character"], 1)
+        self.assertEqual(wc["im"], 1)
+        self.assertFalse("2" in wc)
+
+    def test_hardest_file(self):
+        local_filename = "./test_file3.txt"
+        decoded_file = Path(local_filename).read_text()
+        local_file = io.StringIO(decoded_file)
+        wc = word_count(local_file)
+        self.assertEqual(wc["a"], 4)
+        self.assertEqual(wc["case"], 3)
+        self.assertEqual(wc["its"], 2)
+        self.assertFalse("234" in wc)
+
+    
+    def test_provided_file(self):
+        wc = word_count(input_file)
+        self.assertEqual(wc["phishing"], 142)
+        self.assertEqual(wc["spearphishing"], 3)
+        self.assertEqual(wc["emails"], 20)
 
 if __name__ == '__main__':
     unittest.main()

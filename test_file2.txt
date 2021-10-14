@@ -1,3 +1,4 @@
-This is a level 3 file. 
+This is a level 2 file. 
 It has some special character$ and then sâm€”. 
 it has some upper case and lower CASE repeated words. 
+And another one - I'm confusing. 

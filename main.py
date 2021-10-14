@@ -28,6 +28,7 @@ def buffered_read(file):
         chunk = file.read(block_size)
         if not chunk:
             break
+        chunk = process_text(chunk)     # Clean up chunk
         words = re.split("\W+", buffer + chunk)
         buffer = words.pop()  # partial word at end of chunk or empty
         for word in words:
@@ -42,7 +43,6 @@ def word_count(input_file):
     
     # Stream input
     for block in buffered_read(input_file):
-        block = process_text(block)
         wc = Counter(block.split())
         for w, c in wc.items():
             if w in word_count:
@@ -55,8 +55,9 @@ def word_count(input_file):
 # Helper to process/clean text.
 # This can be expanded to further clean up input data as required. 
 def process_text(word_block):
-    word_block = unidecode(word_block)              # remove accents etc.
+    word_block = "".join(c if ord(c)<128 else "-" for c in word_block )     # Hacky fix for non-ascii issues 
     word_block = word_block.lower()                 # make everything lowercase
+    word_block = word_block.replace("'", "")    # remove apostrophies
+    word_block = word_block.replace("-", " ")    # replace dashes with spaces
     word_block = re.sub('[\d]', ' ', word_block)    # remove numbers
     return re.sub('[^\w]', ' ', word_block)         #remove all non-words and return
-
