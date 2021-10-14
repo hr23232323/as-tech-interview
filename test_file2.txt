@@ -1,0 +1,8 @@
+This is a level 2 file. 
+It has some special character$ and then sâm€”. 
+it has some upper case and lower CASE repeated words. 
+It contains some [234] and $257,973 and 2.353.
+
+It also has some new lines to worry about.
+
+And finally it has a single line with more than 512 characters to test incomplete words coming through the data stream. So you can ignore this or you can continue reading. It's 9:34pm and it's been a beautiful day in Boston. I think I'm very close to 512 characters and want to make sure I put a word which is split down the middle when 512 characters are read. Okay, goodbye now. And another caSe.
